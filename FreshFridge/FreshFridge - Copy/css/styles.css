@@ -1,0 +1,170 @@
+/*Alex Paz A16900476*/
+#intro {
+  background-color: #9df1af;
+}
+
+.container-fluid {
+  padding: 3% 15%;
+}
+
+.intro-text {
+  font-family: 'Montserrat', sans-serif;
+  padding: 10% 20%;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  line-height: 1.5;
+  font-weight: normal;
+  color:#000000;
+}
+
+h2 {  
+  color: #000000;
+  font-family: 'Montserrat';
+  font-size: 1.5;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: 'Montserrat';
+  font-weight: bold;
+}
+
+p {
+  color: #000000;
+}
+
+.navbar {
+  padding: 0 0 4.5rem;
+}
+
+.navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-item {
+  padding: 0 18px;
+}
+
+.nav-link {
+  font-family: 'Ubuntu';
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.download-button {
+  margin: 5% 5% 5% 0;
+}
+
+.feature-box {
+  text-align: center;
+  padding: 5%;
+}
+
+.icon {
+  color: #efce12;
+  margin-bottom: 1rem;
+}
+
+#work {
+  padding: 7% 15%;
+  text-align: center;
+  background-color: #7099c7;
+}
+
+.work-row {
+  padding:0.5%;
+}
+h3.work-header {
+  font-weight:  bold;
+}
+
+.work-image {
+  width: 100%;
+  border-radius: 1%;
+  margin:10px;
+}
+
+.carousel-item {
+  padding: 7% 15%;
+}
+
+#team {
+  background-color: #d5f1db;
+  text-align: center;
+}
+
+.team-row {
+  padding:3%;
+}
+
+.problem-logo {
+  width: 50%;
+  margin: 20px 20px 50px;
+}
+
+#problem {
+  padding: 100px;
+  text-align: center;
+}
+
+.pricing-header {
+  color: black;
+}
+
+.pricing-column {
+  padding: 3% 2%;
+}
+
+#socials {
+  background-color: #ffffff;
+  color:#fff;
+  padding: 7% 15%;
+  text-align: center;
+}
+
+#home {
+  text-align: center;
+  padding: 7% 15%;
+}
+
+.social-icon {
+  margin: 20px 10px;
+  font-size: 30px;
+}
+
+.problem-heading {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 3.5rem;
+  line-height: 1.5;
+}
+
+.fa-facebook, .fa-envelope, .fa-linkedin {
+  color: #352cdbd7;
+}
+
+.social-icon:hover {
+  color: #000000;
+}
+
+.carousel-icon:hover {
+  color: #000000;
+}
+
+.footer-text {
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+em.work-summary {
+  font-family: 'Ubuntu';
+  font-size: 20px;
+  color:white;
+}
