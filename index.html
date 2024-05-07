@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/74986de492.js" crossorigin="anonymous"></script>
+
+    <title>FreshFridge</title>
+  </head>
+  <body>
+    <section id="intro">
+      <!-- Nav Bar -->
+      <div class="container-fluid">
+        <nav class = "navbar navbar-expand-lg navbar-light">
+          <a class = "navbar-brand" href = "#">FreshFridge</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class = "navbar-nav ml-auto">
+              <li class = "navbar-item">
+                <a href="#problem" class="nav-link">Solution</a>
+              </li>
+              <li class="navbar-item">
+                <a href="#work" class="nav-link">Work</a>
+              </li>
+              <li class="navbar-item">
+                <a href="#team" class="nav-link">Team</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- Title -->
+        <div class="row">
+
+          <div class="col-lg-10">
+            <div class="intro-text">
+              <h1>FreshFridge's mission is to help prevent food spoilage in young adult fridges.</h1>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <!--<img class = "title-image" src="images/UCSD1.png" alt="UCSD photo">-->
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- Mission -->
+    <section id="problem">
+      <h3 class="problem-heading">FreshFridge's Solution</h3>
+      <img class="problem-logo" src="images/spoiledMilk.jpg" alt="Image of spoiled milk.">
+      <h3>FreshFridge is planning on creating a container that uses multiple different types of gas sensors to detect what types of food have gone bad and warns the user about it by sending notifications on an app. The device is primarily intended to be used within refrigerators and will provide both live physical detection and remote reminders.</h3>
+
+  </section>
+    <!--  Features -->
+
+    <section id="team">
+      <div class="team-row">
+        <h3>Meet the team!</h3>
+      </div>
+      <div class="row">
+        <div class="feature-box col-lg-4">
+          <i class="fa-solid fa-microchip icon fa-3x"></i>
+          <h3>Michael Aquilina</h3>
+          <p>Team Member</p>
+        </div>
+
+        <div class="feature-box col-lg-4">
+          <i class="fa-solid fa-computer icon fa-3x"></i>
+          <h3>Khanh Nguyen</h3>
+          <p>Team Member</p>
+        </div>
+
+        <div class="feature-box col-lg-4">
+          <i class="fa-regular fa-window-restore icon fa-3x"></i>
+          <h3>Alex Paz</h3>
+          <p>Team Member</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+
+    <section id="work">
+      <div class = "work-row">
+        <h3 id= work-header>Our work so far</h3>
+      </div>
+      <div id="work-carousel" class="carousel slide" data-wrap="false">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <h2>PCB Schematic</h2>
+            <img class="work-image" src="images/schematic.png" alt="database project image">
+            <em>FreshFridge gas sensor PCB schematic</em>
+            <br></br>
+            <em class="work-summary">Making a parking ticket database that correctly manages memory using pointers and data structures using C.</em>
+          </div>
+
+          <div class="carousel-item">
+            <h2>NINE19 Simple Microprocessor</h2>
+            <img class="work-image" src="images/drawing.jpg" alt="processor project image">
+            <em>Rough drawing of FreshFridge solution idea.</em>
+            <br></br>
+            <em class="work-summary">Designing an ISA for a 9-bit CPU designed to perform specific forward error correction tasks. This project
+              also included creating an assembly language and coding an assembler designed to convert code written in
+              my assembly language into my ISAs 9-bit machine code.</em>
+          </div>
+
+          <div class="carousel-item">
+            <h2>Encryption Circuit</h2>
+            <img class="work-image" src="images/encryption.webp" alt="encryption project image">
+            <em>CSE 141L from February 2023 - March 2023 (Image is not my work)</em>
+            <br></br>
+            <em class="work-summary">Designing a circuit that can do encryption and decryption of 32 bytes of data using System Verilog in Quartus. Project emphasized the use of ModelSim for debugging the design and the creation of a working sequential state machine and datapath to handle the decryption and encryption.
+            </em>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#work-carousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon carousel-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#work-carousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon carousel-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </section>
+
+  <!--<footer id="socials">
+    <i class="fa-brands fa-facebook social-icon" onClick="facebook()"></i>
+    <i class="fa-brands fa-linkedin social-icon" onClick="linkedin()"></i>
+    <i class="fa-solid fa-envelope social-icon" onClick="email()"></i>
+    <p class = "footer-text">Alex Paz - 2023</p>
+  </footer>-->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+      <script src="js/script.js"></script>
+    </body>
+  </html>
