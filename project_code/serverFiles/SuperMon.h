@@ -248,6 +248,10 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
         <td><div class="bodytext">Mic pin 1</div></td>
         <td><div class="tabledata" id = "b1"></div></td>
       </tr>
+      <tr>
+        <td><div class="bodytext">MQ4</div></td>
+        <td><div class="tabledata" id = "b2"></div></td>
+      </tr>
       </table>
     </div>
   </main>
@@ -315,16 +319,29 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
       document.getElementById("time").innerHTML = dt.toLocaleTimeString();
       document.getElementById("date").innerHTML = dt.toLocaleDateString();
   
-      // A0
+      // B1
       xmldoc = xmlResponse.getElementsByTagName("B1"); //bits for MIC (og b0)
       message = xmldoc[0].firstChild.nodeValue;
+
       
-      document.getElementById("b0").innerHTML=message;
+      document.getElementById("b1").innerHTML=message;
 
       // if you want to use global color set above in <style> section
       // other wise uncomment and let the value dictate the color
-      //document.getElementById("b0").style.backgroundColor=color;
-      //document.getElementById("b0").style.borderRadius="5px";
+      //document.getElementById("b1").style.backgroundColor=color;
+      //document.getElementById("b1").style.borderRadius="5px";
+
+      // B2
+      xmldoc = xmlResponse.getElementsByTagName("B2"); //bits for MQ4
+      message = xmldoc[0].firstChild.nodeValue;
+
+      
+      document.getElementById("b2").innerHTML=message;
+
+      // if you want to use global color set above in <style> section
+      // other wise uncomment and let the value dictate the color
+      //document.getElementById("b2").style.backgroundColor=color;
+      //document.getElementById("b2").style.borderRadius="5px";
      }
   
     // general processing code for the web page to ask for an XML steam
