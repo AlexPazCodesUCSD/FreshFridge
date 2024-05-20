@@ -77,13 +77,15 @@
 #define PIN_LED 2     //On board LED*/
 
 #define micPin 1
+#define MQ4Pin 2
+
 //#define PIN_A0 34     // sensor1
 //#define SDA_PIN 21
 //#define SCL_PIN 26
 //#define PIN_A1 35     // sensor2
 
 // variables to store measure data and sensor states
-int AmmoniaValue = 0, micValue = 0; //BitsA1 = 0;
+int AmmoniaValue = 0, micValue = 0, MQ4Value = 0; //BitsA1 = 0;
 float ammoniaConcentration = 0; //VoltsA1 = 0;
 //bool SomeOutput = false;
 uint32_t SensorUpdate = 0;
@@ -111,7 +113,7 @@ void setup() {
 
   // standard stuff here
   //Wire.begin(SDA_PIN, SCL_PIN);
-  Serial.begin(115200);
+  USBSerial.begin(115200);
   
   //USBSerial.begin(115200);
 
@@ -125,16 +127,16 @@ void setup() {
   //  disableCore1WDT();
 
   // just an update to progress
-  Serial.println("starting server");
+  USBSerial.println("starting server");
 
   // if you have this #define USE_INTRANET,  you will connect to your home intranet, again makes debugging easier
 #ifdef USE_INTRANET
   WiFi.begin(LOCAL_SSID, LOCAL_PASS);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
+    USBSerial.print(".");
   }
-  Serial.print("IP address: "); Serial.println(WiFi.localIP());
+  USBSerial.print("IP address: "); USBSerial.println(WiFi.localIP());
   Actual_IP = WiFi.localIP();
 #endif
 
@@ -147,7 +149,7 @@ void setup() {
   WiFi.softAPConfig(PageIP, gateway, subnet);
   delay(100);
   Actual_IP = WiFi.softAPIP();
-  Serial.print("IP address: "); Serial.println(Actual_IP);
+  USBSerial.print("IP address: "); USBSerial.println(Actual_IP);
 #endif
 
   printWifiStatus();
@@ -167,6 +169,7 @@ void setup() {
   // as you can imagine you will need to code some javascript in your web page to send such strings
   // this process will be documented in the SuperMon.h web page code
   server.on("/ProcessMic", ProcessMic);
+  server.on("/ProcessMQ4", ProcessMQ4);
   /*server.on("/BUTTON_0", ProcessButton_0);
   server.on("/BUTTON_1", ProcessButton_1);*/
 
@@ -206,9 +209,10 @@ void loop() {
   delay(1000);*/
 
   if ((millis() - SensorUpdate) >= 50) {
-    Serial.println("Reading Sensors");
+    USBSerial.println("Reading Sensors");
     SensorUpdate = millis();
     micValue = analogRead(micPin);
+    MQ4Value = analogRead(MQPin);
     //BitsA1 = analogRead(PIN_A1);
 
     // standard converion to go from 12 bit resolution reads to volts on an ESP
@@ -290,6 +294,35 @@ void ProcessMic() {
     */
 }
 
+void ProcessMQ4() {
+
+  // regardless if you want to send stuff back to client or not
+  // you must have the send line--as it keeps the page running
+  // if you don't want feedback from the MCU--or let the XML manage
+  // sending feeback
+
+  // option 1 -- keep page live but dont send any thing
+  // here i don't need to send and immediate status, any status
+  // like the illumination status will be send in the main XML page update
+  // code
+  strcpy(buf, "");
+  sprintf(buf, "%d", MQ4Value);
+  sprintf(buf, buf);
+  server.send(200, "text/plain", "buf"); //Send web page
+
+  // option 2 -- keep page live AND send a status
+  // if you want to send feed back immediataly
+  // note you must have reading code in the java script
+  /*
+    if (LED0) {
+    server.send(200, "text/plain", "1"); //Send web page
+    }
+    else {
+    server.send(200, "text/plain", "0"); //Send web page
+    }
+    */
+}
+
 
 
 // code to send the main web page
@@ -315,13 +348,9 @@ void SendXML() {
   sprintf(buf, "<B1>%d</B1>\n", micValue);
   strcat(XML, buf);
 
-  /*// show led0 status
-  if (LED0) {
-    strcat(XML, "<LED>1</LED>\n");
-  }
-  else {
-    strcat(XML, "<LED>0</LED>\n");
-  }*/
+  
+  sprintf(bug,"<B2>%d</B2>\n", MQ4Value);
+  strcat(XML,buf);
 
   /*if (SomeOutput) {
     strcat(XML, "<SWITCH>1</SWITCH>\n");
@@ -334,7 +363,7 @@ void SendXML() {
   // wanna see what the XML code looks like?
   // actually print it to the serial monitor and use some text editor to get the size
   // then pad and adjust char XML[2048]; above
-  Serial.println(XML);
+  USBSerial.println(XML);
 
   // you may have to play with this value, big pages need more porcessing time, and hence
   // a longer timeout that 200 ms
@@ -347,22 +376,22 @@ void SendXML() {
 void printWifiStatus() {
 
   // print the SSID of the network you're attached to:
-  Serial.print("SSID: ");
-  Serial.println(WiFi.SSID());
+  USBSerial.print("SSID: ");
+  USBSerial.println(WiFi.SSID());
 
   // print your WiFi shield's IP address:
   ip = WiFi.localIP();
-  Serial.print("IP Address: ");
-  Serial.println(ip);
+  USBSerial.print("IP Address: ");
+  USBSerial.println(ip);
 
   // print the received signal strength:
   long rssi = WiFi.RSSI();
-  Serial.print("signal strength (RSSI):");
-  Serial.print(rssi);
-  Serial.println(" dBm");
+  USBSerial.print("signal strength (RSSI):");
+  USBSerial.print(rssi);
+  USBSerial.println(" dBm");
   // print where to go in a browser:
-  Serial.print("Open http://");
-  Serial.println(ip);
+  USBSerial.print("Open http://");
+  USBSerial.println(ip);
 }
 
 // end of code
