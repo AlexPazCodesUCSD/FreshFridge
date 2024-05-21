@@ -36,12 +36,23 @@ const char* htmlContent = R"(
 
     function onLoad(event) {
       initWebSocket();
+      document.getElementById('slider').addEventListener('input', onSliderChange);
+    }
+
+    function onSliderChange(event) {
+      var sliderValue = document.getElementById('slider').value;
+      document.getElementById('sliderValue').innerHTML = sliderValue;
+      websocket.send(sliderValue);
     }
   </script>
 </head>
 <body>
   <h1>ESP32 WebSocket</h1>
   <p>Sensor Value: <span id="sensor">0</span></p>
+  <p>
+    Update Interval: <span id="sliderValue">1000</span> ms
+    <input type="range" id="slider" min="500" max="5000" value="1000">
+  </p>
 </body>
 </html>
 )";

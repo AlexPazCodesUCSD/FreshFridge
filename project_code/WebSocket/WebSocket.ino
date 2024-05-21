@@ -2,11 +2,13 @@
 #include <Wire.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-#include "webpage.h" // Include the header file
+#include "webpage.h"
 
 // Replace with your network credentials
 const char* ssid = "MAiPhone";
 const char* password = "singapore";
+
+// http://172.20.10.11/
 
 #define SDA_PIN 23
 #define SCL_PIN 22
@@ -16,7 +18,7 @@ AsyncWebSocket ws("/ws");
 
 int sensorValue = 0;
 unsigned long previousMillis = 0;  // Stores the last time sensor data was updated
-const long interval = 1000;         // Interval at which to read the sensor (in milliseconds)
+long interval = 1000;              // Interval at which to read the sensor (in milliseconds)
 
 void onWebSocketEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, 
                       AwsEventType type, void *arg, uint8_t *data, size_t len) {
@@ -24,6 +26,11 @@ void onWebSocketEvent(AsyncWebSocket *server, AsyncWebSocketClient *client,
     Serial.println("WebSocket client connected");
   } else if (type == WS_EVT_DISCONNECT) {
     Serial.println("WebSocket client disconnected");
+  } else if (type == WS_EVT_DATA) {
+    String message = String((char*)data).substring(0, len);
+    Serial.print("Received slider value: ");
+    Serial.println(message);
+    interval = message.toInt();  // Update the interval based on the slider value
   }
 }
 
@@ -71,7 +78,9 @@ void loop() {
       byte lsb = Wire.read();
 
       sensorValue = ((msb << 8) | lsb);
-      Serial.print("Sensor Value: ");
+      Serial.print("Sensor Value (");
+      Serial.print(interval);
+      Serial.print(" ms): ");
       Serial.println(sensorValue);
     }
 
@@ -80,6 +89,5 @@ void loop() {
     ws.textAll(message);
   }
 
-  // Handle WebSocket communication
   ws.cleanupClients();
 }
