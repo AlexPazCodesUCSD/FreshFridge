@@ -112,28 +112,26 @@ const char* htmlContent = R"(
 </head>
 <body>
   <h1>Fresh Fridge - Food Health Monitor</h1>
-  <div class="container">
-    <div class="column">
-      <h2>Sensor Data</h2>
-      <p>Ammonia Sensor: <span id="sensor1">0</span></p>
-      <p>CO2 Sensor: <span id="sensor2">0</span></p>
-      <p>Ethanol Sensor: <span id="sensor3">0</span></p>
-      <p>Humidity Sensor: <span id="sensor4">0</span></p>
-      <div class="slider-container">
-        <p>Update Interval: <span id="sliderValue">1000</span> ms</p>
-        <input type="range" id="slider" min="500" max="5000" value="1000">
-      </div>
-    </div>
-    <div class="column">
-      <h2>Produce Information</h2>
-      <p id="produce">Produce Name</p>
-      <img id="produce-img" src="https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bunch-of-bananas-67e91d5.jpg?quality=90&resize=440,400" alt="Produce Image">
-    </div>
-  </div>
+
+  <h2>Your Food</h2>
+  <div id="objectList"></div>
+
+  <h2>Add Food</h2>
+<form id="objectForm">
+    <label for="objectName">Food Name:</label>
+    <input type="text" id="objectName" name="objectName" required>
+    <br>
+    <label for="containerNum">Container:</label>
+    <input type="number" id="containerNum" name="containerNum" required>
+    <br>
+    <button type="submit">Add food</button>
+</form>
+<div id="error-message" style="color: red; display: none;"></div>
+
+
   <div class="center">
     <div class="info">
       <h2>Food Health Indicator</h2>
-      <p>Health Rating: <span id="health-rating">0</span></p>
       <p id="health-status">Health Status</p>
       <img id="health-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQWN-SLzk5eeEuA9zBJKzsM0qbvtLsKDfJ-w&s" alt="Health Status Image">
     </div>
