@@ -3,8 +3,9 @@ var websocket;
 
 window.addEventListener('load', onLoad);
 
-const API_KEY = 'API KEY';
+const API_KEY = 'api-key';
 
+//
 function initWebSocket() {
   console.log('Trying to open a WebSocket connection...');
   websocket = new WebSocket(gateway);
@@ -32,7 +33,6 @@ function onMessage(event) {
 
 function onLoad(event) {
   initWebSocket();
-  document.getElementById('slider').addEventListener('input', onSliderChange);
   document.getElementById('generateRecipe').addEventListener('click', generateRecipe);
 
   // Load objects from localStorage on page load
@@ -40,52 +40,13 @@ function onLoad(event) {
   objects.forEach(addObjectToList);
 }
 
-function onSliderChange(event) {
-  var sliderValue = document.getElementById('slider').value;
-  document.getElementById('sliderValue').innerHTML = sliderValue;
-  websocket.send(sliderValue);
-}
-
-async function generateRecipe() {
-  const responseTextarea = document.getElementById('recipe-output')
-  try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: 'Generate a very simple recipe using Bananas' }],
-        temperature: 1.0,
-        top_p: 0.7,
-        n: 1,
-        stream: false,
-        presence_penalty: 0,
-        frequency_penalty: 0,
-      }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      responseTextarea.value = data.choices[0].message.content;
-      responseTextarea.classList.add('show');
-    } else {
-      responseTextarea.value = 'Try Again';
-    }
-  } catch (error) {
-    console.error(error);
-    responseTextarea.value = 'Try Again';
-  }
-}
 
 // Function to add object to the list
 function addObjectToList(object) {
   const objectList = document.getElementById('objectList');
   const objectRow = document.createElement('div');
   objectRow.classList.add('object-row');
-  objectRow.textContent = object.name;
+  objectRow.textContent = `Container ${object.containerNum}: ${object.name}`;
 
   // Add event listener based on container number
   objectRow.addEventListener('click', function() {
@@ -147,8 +108,46 @@ document.getElementById('objectForm').addEventListener('submit', function(event)
   document.getElementById('objectForm').reset();
 });
 
-// Load objects from localStorage on page load
-window.onload = function() {
-  const objects = JSON.parse(localStorage.getItem('objects')) || [];
-  objects.forEach(addObjectToList);
-};
+async function generateRecipe() {
+  const responseTextarea = document.getElementById('recipe-output');
+  try {
+    // Retrieve objects from localStorage
+    const objects = JSON.parse(localStorage.getItem('objects')) || [];
+
+    // Extract names of the foods
+    const foodNames = objects.map(obj => obj.name).join(', ');
+
+    // Construct the message for the API request
+    const messageContent = `Generate a very simple recipe using ${foodNames}`;
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: messageContent }],
+        temperature: 1.0,
+        top_p: 0.7,
+        n: 1,
+        stream: false,
+        presence_penalty: 0,
+        frequency_penalty: 0,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      responseTextarea.value = data.choices[0].message.content;
+      responseTextarea.classList.add('show');
+    } else {
+      responseTextarea.value = 'Try Again';
+    }
+  } catch (error) {
+    console.error(error);
+    responseTextarea.value = 'Try Again';
+  }
+}
+

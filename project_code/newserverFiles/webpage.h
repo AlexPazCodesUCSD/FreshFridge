@@ -150,6 +150,7 @@ const char* htmlContent = R"(
   <script src="script.js"></script>
 </body>
 </html>
+
 )";
 
 #endif // WEBPAGE_H
