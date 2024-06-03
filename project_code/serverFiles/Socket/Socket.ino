@@ -57,6 +57,10 @@ void setup() {
     request->send(SPIFFS, "/index.html", "text/html");
   });
 
+  server.on("/index.html", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/index.html", "text/html");
+  });
+
   // Route for container1_html.html
   server.on("/container1_html.html", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/container1_html.html", "text/html");
