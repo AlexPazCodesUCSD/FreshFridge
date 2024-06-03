@@ -126,21 +126,16 @@ const char* htmlContent = R"(
     <br>
     <button type="submit">Add food</button>
 </form>
+
 <div id="error-message" style="color: red; display: none;"></div>
 
-
   <div class="center">
-    <div class="info">
-      <h2>Food Health Indicator</h2>
-      <p id="health-status">Health Status</p>
-      <img id="health-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQWN-SLzk5eeEuA9zBJKzsM0qbvtLsKDfJ-w&s" alt="Health Status Image">
-    </div>
     <button id="generateRecipe">Generate Recipe</button>
 
     <div style="text-align: center;">
       <h2>Recipe:</h2>
       <textarea id="recipe-output" rows="20" readonly></textarea>
-  </div>
+    </div>
   
   </div>
   <div class="footer">
