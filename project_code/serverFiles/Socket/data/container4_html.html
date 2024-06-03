@@ -89,21 +89,22 @@
         button:hover {
           background-color: #45a049;
         }
-        .health {
-          font-size: 1.2em;
-          color: green; /* Default color */
-          transition: color 0.3s ease;
+        .healthy {
+          color: green;
+        }
+        .spoiling {
+          color: red;
         }
     </style>
 </head>
 <body>
     <h1>Food Detail</h1>
-    <h2>Container #3</h2>
+    <h2>Container #4</h2>
 
     <div class="container">
         <div class = "column">
             <h2>Health Status</h2>
-            <p id="healthStatus" class = "health">Healthy</p>
+            <p id="healthStatus" class = "healthy">Healthy</p>
 
             <h2>Sensor Data</h2>
             <p>Ammonia Sensor: <span id="sensor1">0</span></p>
@@ -142,31 +143,33 @@
             const index = objects.findIndex(obj => obj.id == objectId);
             objects.splice(index, 1);
             localStorage.setItem('objects', JSON.stringify(objects));
-            window.location.href = 'webpage.html';
+            window.location.href = 'index.html';
         });
 
         // Function to update sensor data from localStorage
         function updateSensorData() {
-            document.getElementById('sensor1').innerHTML = 600;
+            document.getElementById('sensor1').innerHTML = 400;
             document.getElementById('sensor2').innerHTML = 200;
             document.getElementById('sensor3').innerHTML = 100;
-            document.getElementById('sensor4').innerHTML = 340;
+            document.getElementById('sensor4').innerHTML = 10000;
         }
 
         // Function to update health status based on sensor data
         function updateHealthStatus(sensorData) {
             const healthStatus = document.getElementById('healthStatus');
-            const sensorValue1 = 600;
+            const sensorValue1 = 400;
             const sensorValue2 = 200;
             const sensorValue3 = 100;
-            const sensorValue4 = 340;
+            const sensorValue4 = 10000;
 
             if (sensorValue1 > 500 || sensorValue2 > 222 || sensorValue3 > 366 || sensorValue4 > 9000) {
                 healthStatus.textContent = 'Spoiling';
-                healthStatus.style.color = 'red';
+                healthStatus.classList.remove('healthy');
+                healthStatus.classList.add('spoiling');
             } else {
                 healthStatus.textContent = 'Healthy';
-                healthStatus.style.color = 'green';
+                healthStatus.classList.remove('spoiling');
+                healthStatus.classList.add('healthy');
             }
         }
 

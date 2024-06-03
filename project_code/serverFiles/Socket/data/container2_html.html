@@ -99,7 +99,7 @@
 </head>
 <body>
     <h1>Food Detail</h1>
-    <h2>Container #4</h2>
+    <h2>Container #2</h2>
 
     <div class="container">
         <div class = "column">
@@ -143,24 +143,24 @@
             const index = objects.findIndex(obj => obj.id == objectId);
             objects.splice(index, 1);
             localStorage.setItem('objects', JSON.stringify(objects));
-            window.location.href = 'webpage.html';
+            window.location.href = 'index.html';
         });
 
         // Function to update sensor data from localStorage
         function updateSensorData() {
-            document.getElementById('sensor1').innerHTML = 400;
+            document.getElementById('sensor1').innerHTML = 300;
             document.getElementById('sensor2').innerHTML = 200;
-            document.getElementById('sensor3').innerHTML = 100;
-            document.getElementById('sensor4').innerHTML = 10000;
+            document.getElementById('sensor3').innerHTML = 400;
+            document.getElementById('sensor4').innerHTML = 500;
         }
 
         // Function to update health status based on sensor data
         function updateHealthStatus(sensorData) {
             const healthStatus = document.getElementById('healthStatus');
-            const sensorValue1 = 400;
+            const sensorValue1 = 300;
             const sensorValue2 = 200;
-            const sensorValue3 = 100;
-            const sensorValue4 = 10000;
+            const sensorValue3 = 400;
+            const sensorValue4 = 500;
 
             if (sensorValue1 > 500 || sensorValue2 > 222 || sensorValue3 > 366 || sensorValue4 > 9000) {
                 healthStatus.textContent = 'Spoiling';

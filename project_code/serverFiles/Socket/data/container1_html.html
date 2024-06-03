@@ -102,15 +102,12 @@
     <h2>Container #1</h2>
 
     <div class="container">
-        <div class = "column">
+        <div class="column">
             <h2>Health Status</h2>
-            <p id="healthStatus" class = "healthy">Healthy</p>
+            <p id="healthStatus" class="healthy">Healthy</p>
 
             <h2>Sensor Data</h2>
-            <p>Ammonia Sensor: <span id="sensor1">0</span></p>
-            <p>CO2 Sensor: <span id="sensor2">0</span></p>
-            <p>Ethanol Sensor: <span id="sensor3">0</span></p>
-            <p>Humidity Sensor: <span id="sensor4">0</span></p>
+            <p>CO2 Sensor: <span id="sensor1">0</span></p>
             <div class="slider-container">
               <p>Update Interval: <span id="sliderValue">1000</span> ms</p>
               <input type="range" id="slider" min="500" max="5000" value="1000">
@@ -118,8 +115,8 @@
         </div>
 
         <div class="column">
-          <h2 id="objectDetail">Produce Name</h2>
-          <img id="produce-img" src="https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bunch-of-bananas-67e91d5.jpg?quality=90&resize=440,400" alt="Produce Image">
+            <h2 id="objectDetail">Produce Name</h2>
+            <img id="produce-img" src="https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bunch-of-bananas-67e91d5.jpg?quality=90&resize=440,400" alt="Produce Image">
         </div>
     </div>
 
@@ -129,32 +126,23 @@
         // Get object ID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const objectId = urlParams.get('id');
-        
-        // Load object from localStorage
-        const objects = JSON.parse(localStorage.getItem('objects')) || [];
-        const object = objects.find(obj => obj.id == objectId);
-        
-        // Display object details
-        const objectDetail = document.getElementById('objectDetail');
-        objectDetail.innerHTML = `<p>Name: ${object.name}</p>`;
-        
-        // Handle delete button click
-        document.getElementById('deleteButton').addEventListener('click', function() {
+
+        // Function to delete the container
+        function deleteButton() {
+            const objects = JSON.parse(localStorage.getItem('objects')) || [];
             const index = objects.findIndex(obj => obj.id == objectId);
-            objects.splice(index, 1);
-            localStorage.setItem('objects', JSON.stringify(objects));
-            window.location.href = 'index.html';
-        });
+            if (index !== -1) {
+                objects.splice(index, 1);
+                localStorage.setItem('objects', JSON.stringify(objects));
+                window.location.href = 'index.html';
+            }
+        }
 
         // Function to update sensor data from localStorage
         function updateSensorData() {
             const sensorData = JSON.parse(localStorage.getItem('sensorData'));
             if (sensorData) {
                 document.getElementById('sensor1').innerHTML = sensorData.sensorValue1;
-                document.getElementById('sensor2').innerHTML = sensorData.sensorValue2;
-                document.getElementById('sensor3').innerHTML = sensorData.sensorValue3;
-                document.getElementById('sensor4').innerHTML = sensorData.sensorValue4;
-                
                 updateHealthStatus(sensorData);
             }
         }
@@ -175,11 +163,25 @@
             }
         }
 
-        // Update sensor data every second
-        setInterval(updateSensorData, 1000);
+        // Set up the page when it loads
+        window.onload = function() {
+            // Load object details from localStorage
+            const objects = JSON.parse(localStorage.getItem('objects')) || [];
+            const object = objects.find(obj => obj.id == objectId);
+            if (object) {
+                const objectDetail = document.getElementById('objectDetail');
+                objectDetail.innerHTML = `<p>Name: ${object.name}</p>`;
+            }
 
-        // Initial call to display sensor data
-        updateSensorData();
+            // Assign the delete button click event handler
+            document.getElementById('deleteButton').addEventListener('click', deleteButton);
+
+            // Initial call to display sensor data
+            updateSensorData();
+
+            // Update sensor data every second
+            setInterval(updateSensorData, 1000);
+        };
     </script>
 </body>
 </html>
