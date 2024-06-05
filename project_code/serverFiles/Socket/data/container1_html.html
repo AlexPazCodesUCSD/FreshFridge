@@ -108,10 +108,10 @@
 
             <h2>Sensor Data</h2>
             <p>CO2 Sensor: <span id="sensor1">0</span></p>
-            <div class="slider-container">
-              <p>Update Interval: <span id="sliderValue">1000</span> ms</p>
-              <input type="range" id="slider" min="500" max="5000" value="1000">
-            </div>
+            <p>Ammonia Sensor: <span id="sensor2">0</span></p>
+            <p>Methane Sensor: <span id="sensor3">0</span></p>
+            <p>Temperature Sensor: <span id="sensor4">0</span></p>
+            <p>Humidity Sensor: <span id="sensor5">0</span></p>
         </div>
 
         <div class="column">
@@ -143,6 +143,10 @@
             const sensorData = JSON.parse(localStorage.getItem('sensorData'));
             if (sensorData) {
                 document.getElementById('sensor1').innerHTML = sensorData.sensorValue1;
+                document.getElementById('sensor2').innerHTML = sensorData.sensorValue2;
+                document.getElementById('sensor3').innerHTML = sensorData.sensorValue3;
+                document.getElementById('sensor4').innerHTML = sensorData.sensorValue2;
+                document.getElementById('sensor5').innerHTML = sensorData.sensorValue3;
                 updateHealthStatus(sensorData);
             }
         }
@@ -150,9 +154,9 @@
         // Function to update health status based on sensor data
         function updateHealthStatus(sensorData) {
             const healthStatus = document.getElementById('healthStatus');
-            const { sensorValue1, sensorValue2, sensorValue3, sensorValue4 } = sensorData;
+            const { sensorValue1, sensorValue2, sensorValue3} = sensorData;
 
-            if (sensorValue1 > 500 || sensorValue2 > 222 || sensorValue3 > 366 || sensorValue4 > 9000) {
+            if ( ((sensorValue2 - 2800)/2800) > 0.8 || ((sensorValue2 - 2800)/2800) < -0.8) {
                 healthStatus.textContent = 'Spoiling';
                 healthStatus.classList.remove('healthy');
                 healthStatus.classList.add('spoiling');

@@ -111,9 +111,6 @@
 <body onload="onLoadFunction()">
   <h1>Fresh Fridge - Food Health Monitor</h1>
 
-  <h1>CO2 Sensor Data</h1>
-  <p id="co2">CO2 Level: -- ppm</p>
-
   <h2>Your Food</h2>
   <div id="objectList"></div>
 
@@ -144,12 +141,11 @@
   </div>
   <script>
     var socket = new WebSocket('ws://' + window.location.hostname + '/ws');
-    const API_KEY = 'APIKEY';
+    const API_KEY = 'apikey';
 
     socket.onmessage = function(event) {
         console.log(event.data);
         var data = JSON.parse(event.data);
-        document.getElementById('co2').innerHTML = 'CO2 Level: ' + event.data + ' ppm';
         // Store sensor data in localStorage
         localStorage.setItem('sensorData', JSON.stringify(data));
     };

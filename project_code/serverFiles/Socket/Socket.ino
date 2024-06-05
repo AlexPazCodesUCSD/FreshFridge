@@ -3,19 +3,25 @@
 #include <ESPAsyncWebServer.h>
 #include <AsyncTCP.h>
 #include "SparkFun_SCD4x_Arduino_Library.h"
+#include <Wire.h>
 
-const char* ssid = "SonalSax";
-const char* password = "ArnieSexPics";
+const char* ssid = "BryanAndTheBeanStalk";
+const char* password = "jollyapple802";
 
 #define SDA_PIN 23
 #define SCL_PIN 22
 
-const int methanePin = A0;
-int methaneValue = 0;
 
 SCD4x CO2Sensor;
 
-int sensorValue = 0;
+int sensorValue1 = 0;
+int sensorValue2 = 0;
+int sensorValue3 = 0;
+float co2 = 0;
+int humidity = 0;
+int temperature = 0;
+const int methanePin = A0;
+float ammoniaConcentration = 0;
 unsigned long previousMillis = 0;  // Stores the last time sensor data was updated
 long interval = 1000;              // Interval at which to read the sensor (in milliseconds)
 
@@ -91,21 +97,47 @@ void setup() {
 
 void loop() {
   unsigned long currentMillis = millis();
-
   // Check if the interval has passed to read sensor data
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
     
     if (CO2Sensor.readMeasurement()) { // readMeasurement will return true when fresh data is available
-      float co2 = CO2Sensor.getCO2();
+      co2 = CO2Sensor.getCO2();
+      temperature = CO2Sensor.getTemperature();
+      humidity = CO2Sensor.getHumidity();
+      
       Serial.print(F("CO2 (ppm): "));
       Serial.println(co2);
+      Serial.print("Temperature(C): ");
+      Serial.println(temperature);
+      Serial.print("Humidity: ");
+      Serial.println(humidity);
 
-      // Send CO2 data to all connected WebSocket clients
-      String jsonMessage = "{\"sensorValue1\": " + String(co2) + "}";
-      ws.textAll(jsonMessage);
+      Wire.beginTransmission(0x30);
+      Wire.endTransmission();
+      Wire.requestFrom(0x30, 2);
+      if (Wire.available() == 2) {
+        byte msb = Wire.read();
+        byte lsb = Wire.read();
+  
+        sensorValue2 = ((msb << 8) | lsb);   
+        ammoniaConcentration = sensorValue2 * 0.1; // Example conversion factor
+        
+        Serial.print("Ammonia Concentration (ppm): ");
+        Serial.println(ammoniaConcentration);
+
+      }
     }
+
+    int methaneValue = analogRead(methanePin);
+    Serial.print("Methane (ppm): ");
+    Serial.println(methaneValue);
+
+  String jsonMessage = "{\"sensorValue1\": " + String(co2) + ",\"sensorValue2\": " + String(ammoniaConcentration) + ",\"sensorValue3\": " + String(methaneValue) + ",\"sensorValue4\": " + String(temperature) + ",\"sensorValue5\": " + String(humidity) + "}";
+  ws.textAll(jsonMessage);
+  delay(1000);
   }
+
   
   ws.cleanupClients();
 }
