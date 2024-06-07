@@ -107,11 +107,11 @@
             <p id="healthStatus" class="healthy">Healthy</p>
 
             <h2>Sensor Data</h2>
-            <p>CO2 Sensor: <span id="sensor1">0</span></p>
-            <p>Ammonia Sensor: <span id="sensor2">0</span></p>
-            <p>Methane Sensor: <span id="sensor3">0</span></p>
-            <p>Temperature Sensor: <span id="sensor4">0</span></p>
-            <p>Humidity Sensor: <span id="sensor5">0</span></p>
+            <p>CO2 (ppm): <span id="sensor1">0</span></p>
+            <p>Ammonia (ppm): <span id="sensor2">0</span></p>
+            <p>Methane (ppm): <span id="sensor3">0</span></p>
+            <p>Temperature (C): <span id="sensor4">0</span></p>
+            <p>Humidity (%): <span id="sensor5">0</span></p>
         </div>
 
         <div class="column">
@@ -126,6 +126,19 @@
         // Get object ID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const objectId = urlParams.get('id');
+        var socket = new WebSocket('ws://' + window.location.hostname + '/ws');
+
+        socket.onmessage = function(event) {
+            console.log(event.data);
+            var data = JSON.parse(event.data);
+            // Store sensor data in localStorage
+            localStorage.setItem('sensorData', JSON.stringify(data));
+        };
+
+        window.onbeforeunload = function() {
+          socket.close();
+        };
+
 
         // Function to delete the container
         function deleteButton() {
@@ -167,6 +180,7 @@
             }
         }
 
+
         // Set up the page when it loads
         window.onload = function() {
             // Load object details from localStorage
@@ -187,5 +201,6 @@
             setInterval(updateSensorData, 1000);
         };
     </script>
+
 </body>
 </html>

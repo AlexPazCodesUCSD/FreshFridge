@@ -102,24 +102,21 @@
     <h2>Container #2</h2>
 
     <div class="container">
-        <div class = "column">
+        <div class="column">
             <h2>Health Status</h2>
-            <p id="healthStatus" class = "healthy">Healthy</p>
+            <p id="healthStatus" class="healthy">Healthy</p>
 
             <h2>Sensor Data</h2>
-            <p>Ammonia Sensor: <span id="sensor1">0</span></p>
-            <p>CO2 Sensor: <span id="sensor2">0</span></p>
-            <p>Ethanol Sensor: <span id="sensor3">0</span></p>
-            <p>Humidity Sensor: <span id="sensor4">0</span></p>
-            <div class="slider-container">
-              <p>Update Interval: <span id="sliderValue">1000</span> ms</p>
-              <input type="range" id="slider" min="500" max="5000" value="1000">
-            </div>
+            <p>CO2 Sensor: <span id="sensor1">750</span></p>
+            <p>Ammonia Sensor: <span id="sensor2">3000</span></p>
+            <p>Methane Sensor: <span id="sensor3">500</span></p>
+            <p>Temperature Sensor: <span id="sensor4">24</span></p>
+            <p>Humidity Sensor: <span id="sensor5">52</span></p>
         </div>
 
         <div class="column">
-          <h2 id="objectDetail">Produce Name</h2>
-          <img id="produce-img" src="https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bunch-of-bananas-67e91d5.jpg?quality=90&resize=440,400" alt="Produce Image">
+            <h2 id="objectDetail">Produce Name</h2>
+            <img id="produce-img" src="https://cdn.nyallergy.com/wp-content/uploads/square-1432664914-strawberry-facts1.jpeg" alt="Produce Image">
         </div>
     </div>
 
@@ -129,55 +126,31 @@
         // Get object ID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const objectId = urlParams.get('id');
-        
-        // Load object from localStorage
-        const objects = JSON.parse(localStorage.getItem('objects')) || [];
-        const object = objects.find(obj => obj.id == objectId);
-        
-        // Display object details
-        const objectDetail = document.getElementById('objectDetail');
-        objectDetail.innerHTML = `<p>Name: ${object.name}</p>`;
-        
-        // Handle delete button click
-        document.getElementById('deleteButton').addEventListener('click', function() {
+
+        // Function to delete the container
+        function deleteButton() {
+            const objects = JSON.parse(localStorage.getItem('objects')) || [];
             const index = objects.findIndex(obj => obj.id == objectId);
-            objects.splice(index, 1);
-            localStorage.setItem('objects', JSON.stringify(objects));
-            window.location.href = 'index.html';
-        });
-
-        // Function to update sensor data from localStorage
-        function updateSensorData() {
-            document.getElementById('sensor1').innerHTML = 300;
-            document.getElementById('sensor2').innerHTML = 200;
-            document.getElementById('sensor3').innerHTML = 400;
-            document.getElementById('sensor4').innerHTML = 500;
-        }
-
-        // Function to update health status based on sensor data
-        function updateHealthStatus(sensorData) {
-            const healthStatus = document.getElementById('healthStatus');
-            const sensorValue1 = 300;
-            const sensorValue2 = 200;
-            const sensorValue3 = 400;
-            const sensorValue4 = 500;
-
-            if (sensorValue1 > 500 || sensorValue2 > 222 || sensorValue3 > 366 || sensorValue4 > 9000) {
-                healthStatus.textContent = 'Spoiling';
-                healthStatus.classList.remove('healthy');
-                healthStatus.classList.add('spoiling');
-            } else {
-                healthStatus.textContent = 'Healthy';
-                healthStatus.classList.remove('spoiling');
-                healthStatus.classList.add('healthy');
+            if (index !== -1) {
+                objects.splice(index, 1);
+                localStorage.setItem('objects', JSON.stringify(objects));
+                window.location.href = 'index.html';
             }
         }
 
-        // Update sensor data every second
-        setInterval(updateSensorData, 1000);
+        // Set up the page when it loads
+        window.onload = function() {
+            // Load object details from localStorage
+            const objects = JSON.parse(localStorage.getItem('objects')) || [];
+            const object = objects.find(obj => obj.id == objectId);
+            if (object) {
+                const objectDetail = document.getElementById('objectDetail');
+                objectDetail.innerHTML = `<p>Name: ${object.name}</p>`;
+            }
 
-        // Initial call to display sensor data
-        updateSensorData();
+            // Assign the delete button click event handler
+            document.getElementById('deleteButton').addEventListener('click', deleteButton);
+        };
     </script>
 </body>
 </html>
