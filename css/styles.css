@@ -184,6 +184,7 @@ em.work-summary {
 }
 
 .youtube-video {
+  position: relative;
 }
 
 .pdf-container {
