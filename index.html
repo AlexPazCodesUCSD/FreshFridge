@@ -20,7 +20,11 @@
       <!-- Nav Bar -->
       <div class="container-fluid">
         <nav class = "navbar navbar-expand-lg navbar-light">
-          <a class = "navbar-brand" href = "#">FreshFridge</a>
+          <a class = "navbar-brand" href = "#">
+            FreshFridge
+            <img src="images/iconECE.jpg" alt="FreshFridge Logo" class="ECElogo">
+            ECE 196 Spring 2024
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -42,8 +46,8 @@
         <div class="row">
 
           <div class="col-lg-10">
-            <div class="intro-text">
-              <h1>FreshFridge's mission is to help prevent food spoilage in young adult fridges.</h1>
+            <div class="intro-text image-row"">
+              <h1>FreshFridge's mission is to help prevent food spoilage .</h1>
             </div>
           </div>
           <div class="col-lg-6">
@@ -55,34 +59,41 @@
 
      <!-- Mission -->
     <section id="problem">
-      <h3 class="problem-heading">FreshFridge's Solution</h3>
+      <h3 class="heading">FreshFridge's Solution</h3>
       <img class="problem-logo" src="images/spoiledMilk.jpg" alt="Image of spoiled milk.">
-      <h3>FreshFridge is planning on creating a container that uses multiple different types of gas sensors to detect what types of food have gone bad and warns the user about it by sending notifications on an app. The device is primarily intended to be used within refrigerators and will provide both live physical detection and remote reminders.</h3>
-
-  </section>
+      <h3 class ="problem-description">FreshFridge's food spoilage prevention compartment uses multiple different types of gas sensors to detect what types of food have gone bad and warns the user about it by alerting our website.</h3>
     <!--  Features -->
 
     <section id="team">
       <div class="team-row">
-        <h3>Meet the team!</h3>
+        <h3 class="heading">Meet the team!</h3>
       </div>
       <div class="row">
         <div class="feature-box col-lg-4">
+          <div class = "image-container">
+            <img class = "team-pic" src = "images/michael.jpg"></img>
+          </div>
           <i class="fa-solid fa-microchip icon fa-3x"></i>
           <h3>Michael Aquilina</h3>
-          <p>Team Member</p>
+          <p>Hardware and Software</p>
         </div>
 
         <div class="feature-box col-lg-4">
+          <div class = "image-container">
+            <img class = "team-pic" src = "images/khanh.jpg"></img>
+          </div>
           <i class="fa-solid fa-computer icon fa-3x"></i>
           <h3>Khanh Nguyen</h3>
-          <p>Team Member</p>
+          <p>Hardware and CAD</p>
         </div>
 
         <div class="feature-box col-lg-4">
+          <div class = "image-container">
+            <img class = "team-pic" src = "images/alex2.jpg"></img>
+          </div>
           <i class="fa-regular fa-window-restore icon fa-3x"></i>
           <h3>Alex Paz</h3>
-          <p>Team Member</p>
+          <p>Software and Web Development</p>
         </div>
       </div>
     </section>
@@ -91,7 +102,7 @@
 
     <section id="work">
       <div class = "work-row">
-        <h3 id= work-header>Our work so far</h3>
+        <h3 class="heading" id= work-header>Project Gallery</h3>
       </div>
       <div id="work-carousel" class="carousel slide" data-wrap="false">
         <div class="carousel-inner">
@@ -100,27 +111,45 @@
             <img class="work-image" src="images/schematic.png" alt="database project image">
             <em>FreshFridge gas sensor PCB schematic</em>
             <br></br>
-            <em class="work-summary">Making a parking ticket database that correctly manages memory using pointers and data structures using C.</em>
+            <em class="work-summary">Gas sensors operate on 5V input/output and needs a 4.7k resistive load. Used built-in breakout board to step up 3.3V to 5V to power the entire PCB. PCB used resistor dividers to convert non-I2C voltage
+              output
+              </em>
           </div>
 
           <div class="carousel-item">
-            <h2>NINE19 Simple Microprocessor</h2>
-            <img class="work-image" src="images/drawing.jpg" alt="processor project image">
-            <em>Rough drawing of FreshFridge solution idea.</em>
+            <h2>CAD Design</h2>
+            <img class="work-image" src="images/Cad.PNG" alt="processor project image">
+            <em>Container Cover Final Cad Design.</em>
             <br></br>
-            <em class="work-summary">Designing an ISA for a 9-bit CPU designed to perform specific forward error correction tasks. This project
-              also included creating an assembly language and coding an assembler designed to convert code written in
-              my assembly language into my ISAs 9-bit machine code.</em>
+            <em class="work-summary"></em>
           </div>
 
           <div class="carousel-item">
-            <h2>Encryption Circuit</h2>
-            <img class="work-image" src="images/encryption.webp" alt="encryption project image">
-            <em>CSE 141L from February 2023 - March 2023 (Image is not my work)</em>
+            <h2>A Look Inside</h2>
+            <img class="work-image" src="images/Lid_Inside.PNG" alt="encryption project image">
+            <em>Inside of our 3d-printed cover</em>
             <br></br>
-            <em class="work-summary">Designing a circuit that can do encryption and decryption of 32 bytes of data using System Verilog in Quartus. Project emphasized the use of ModelSim for debugging the design and the creation of a working sequential state machine and datapath to handle the decryption and encryption.
+            <em class="work-summary"> Here you can see our ESP32 and PCB fitted into the container. The cover has a slide fit.
             </em>
           </div>
+
+          <div class="carousel-item">
+            <h2>FreshFridge Website</h2>
+            <img class="work-image" src="images/webpage.PNG" alt="encryption project image">
+            <em>Container page</em>
+            <br></br>
+            <em class="work-summary"> Our website running on a websocket with our ESP32. This is a container page accessible on the website that shows sensor data and health status.
+            </em>
+          </div>
+
+          <div class="carousel-item">
+            <h2>MQ-137 Sensor</h2>
+            <img class="work-image" src="images/MQ137-.PNG" alt="encryption project image">
+            <em>An example of the gas sensors we worked with.</em>
+            <br></br>
+            <em class="work-summary"> Here is what the MQ-137 sensor we used looks like. This sensor detects ammonia, a key gas for detecting certain fruits and vegetables.
+            </em>
+          </div>   
         </div>
         <a class="carousel-control-prev" href="#work-carousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon carousel-icon" aria-hidden="true"></span>
@@ -134,12 +163,28 @@
       </div>
     </section>
 
+    <section id = "video">
+      <h2 class="heading">Project Video</h2> 
+      <div class = "youtube-video">
+        <iframe width="928" height="522" src="https://www.youtube.com/embed/mrk0eW-vEAA" title="ECE 196 - Team 9: Fresh Fridge" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section id = "presentation">
+      <h2 class = "heading">Want to know more?</h2>
+      <h3>Here is our pdf presentation</h3>
+      <div class="pdf-container">
+        <iframe src="Final Project Presentation.pdf" frameborder="0"></iframe>
+    </div>
+    </section>
+
   <!--<footer id="socials">
     <i class="fa-brands fa-facebook social-icon" onClick="facebook()"></i>
     <i class="fa-brands fa-linkedin social-icon" onClick="linkedin()"></i>
     <i class="fa-solid fa-envelope social-icon" onClick="email()"></i>
     <p class = "footer-text">Alex Paz - 2023</p>
   </footer>-->
+
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

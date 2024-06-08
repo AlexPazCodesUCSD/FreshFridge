@@ -14,7 +14,7 @@
 
 h1 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 24px;
+  font-size: 45px;
   line-height: 1.5;
   font-weight: normal;
   color:#000000;
@@ -62,7 +62,7 @@ p {
 
 .feature-box {
   text-align: center;
-  padding: 5%;
+  padding: 1%;
 }
 
 .icon {
@@ -71,16 +71,13 @@ p {
 }
 
 #work {
-  padding: 7% 15%;
+  padding: 2% 15%;
   text-align: center;
   background-color: #7099c7;
 }
 
 .work-row {
   padding:0.5%;
-}
-h3.work-header {
-  font-weight:  bold;
 }
 
 .work-image {
@@ -99,7 +96,7 @@ h3.work-header {
 }
 
 .team-row {
-  padding:3%;
+  padding:2%;
 }
 
 .problem-logo {
@@ -137,11 +134,11 @@ h3.work-header {
   font-size: 30px;
 }
 
-.problem-heading {
+.heading {
   font-family: 'Montserrat';
   font-weight: bold;
   font-size: 3.5rem;
-  line-height: 1.5;
+  line-height: 1;
 }
 
 .fa-facebook, .fa-envelope, .fa-linkedin {
@@ -167,4 +164,62 @@ em.work-summary {
   font-family: 'Ubuntu';
   font-size: 20px;
   color:white;
+}
+
+.navbar-brand .ECElogo {
+  height: 50px; /* Adjust the height as needed */
+  margin-left: 20px; /* Space between the logo and the text */
+  margin-right: 20px; /* Space between the logo and the text */
+}
+
+.problem-description {
+  padding-bottom: 100px;
+}
+
+#video {
+  background-color: #b1e4db;
+  color:#fff;
+  text-align: center;
+  padding: 3% 15%;
+}
+
+.youtube-video {
+  padding: 2% 15%;
+}
+
+.pdf-container {
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff; /* White background */
+}
+
+.pdf-container iframe {
+  width: 80%;
+  height: 90%; /* Adjust the size as needed */
+  border: 1px solid #ccc; /* Light border for better visibility */
+  border-radius: 10px; /* Rounded corners for a nicer effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+#presentation {
+  background-color: #b1e4db;
+  color:#fff;
+  text-align: center;
+  padding: 3% 15%;
+}
+
+.image-container {
+  width: 400px;
+  max-width: 200px; /* Maximum width of the container */
+  margin: 15px auto; /* Center the container */
+}
+
+.team-pic {
+  width: 100%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image covers the container while maintaining its aspect ratio */
+  border-radius: 10px; /* Optional: rounded corners for a nicer effect */
 }
